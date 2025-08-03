@@ -13,12 +13,12 @@ module.exports = {
       fontSize: {
      
         xs: "0.85rem", // 12px
-        sm: "1.4rem", // 14px
-        base: "1rem", // 16px
+        sm: "1.2rem", // 14px
+        base: "15px", // 16px
         lg: "1.3rem", // 18px
         xl: "1.1rem", // 20px
         "2xl": "1.2rem", // 24px
-        "3xl": "1.875rem", // 30px
+        "3xl": "1.2rem", // 30px
       }, 
       
       fontFamily: {

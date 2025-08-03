@@ -8,15 +8,20 @@ import PhysicalAnalysis from "./components/PhysicalAnalysis";
 import FunctionalAnalysis from "./components/FunctionalAnalysis";
 import QualityOfLife from "./components/QualityOfLife";
 import ImageGallery from "./components/ImageGallery";
-import Container from "./components/Container";
+import Container from "./components/ui/Container";
 import Accesses from "./components/Accesses";
 import Summary from "./components/Summary";
 import SideBar from "./components/SideBar";
 import Priorities from "./components/Priorities";
-
+import Location from "./components/location";
+import Comments from "./components/comments";
 function App() {
   return (
-    <div className="relative font-modam font-normal text-base bg-orange-100 text-stone-800">
+    <div className="relative font-modam  text-base  text-gray-800 font-medium">
+      <div
+        className="blur-sm bg-cover fixed inset-0 -z-10 bg-center"
+        style={{ backgroundImage: "url('./images/bolvar.jpg')" }}
+      ></div>
       <SideBar />
       <div className="pl-[8-px] pr-[8px] pb-5  md:pr-60 md:pl-5 ">
         {" "}
@@ -24,6 +29,9 @@ function App() {
         <Container>
           <div id="identify">
             <Identify />
+          </div>
+          <div id="location">
+            <Location />
           </div>
           <div id="history">
             <History />
@@ -38,13 +46,16 @@ function App() {
             <Accesses />
           </div>
           <div id="priorities">
-            <Priorities/>
+            <Priorities />
           </div>
           <div id="quality">
             <QualityOfLife />
           </div>
           <div id="summary">
             <Summary />
+          </div>
+          <div id="comments">
+            <Comments />
           </div>
           <div id="images">
             <ImageGallery />

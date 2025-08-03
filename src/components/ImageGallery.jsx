@@ -2,6 +2,7 @@ import { useState } from "react";
 /* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import{GalleryHorizontal}from"lucide-react"
 
 const images = [
   "./images/img (1).jpg",
@@ -26,12 +27,12 @@ export default function ImageGallery() {
     setSelectedIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
 
   return (
-    <section className="relative my-7 bg-[#FFF6EB] rounded-3xl shadow-lg px-6 py-12 border border-gray-200">
-      <div className="flex justify-center">
-        <h2 className="absolute  sm:text-2xl md:text-lg font-extrabold text-[#8F5100] text-3xl font-bold text-center ">
-          گالری تصاویر
+    <section className="relative  bg-white/50 px-5 backdrop-blur-sm rounded-2xl shadow-lg   border ">
+      <div className="flex justify-center mb-5 ">
+        <h2 className="absolute text-3xl sm:text-2xl p-5  w-full flex flex-row-reverse aling-centeritems-center text-right justify-end gap-2  font-modam font-extrabold   text-[var(--text)] mb-4 leading-snug ">
+        گالری تصاویر <GalleryHorizontal size={28}/>   
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-4 gap-8 mt-20">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-20">
           {images.map((src, index) => (
             <motion.div
               key={index}
@@ -57,28 +58,29 @@ export default function ImageGallery() {
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-white/30 bg-opacity-80 flex items-center h-[100vh] justify-center z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <button
               onClick={handleClose}
-              className="absolute top-4  text-[#FFF6EB] bg-black bg-opacity-50 p-2 rounded-full md:right-60"
+              className="absolute top-4  text-[var(--text)] bg-white/50 bg-opacity-50 p-2 rounded-full md:justify-center"
             >
               <X size={24} />
             </button>
             <button
               onClick={showPrev}
-              className="absolute left-4 text-[#FFF6EB] bg-black bg-opacity-50 p-2 rounded-full"
+              className="absolute left-4 text-[var(--text)] bg-white/50 bg-opacity-50 p-2 rounded-full"
             >
               <ChevronLeft size={32} />
             </button>
             <motion.img
+             loading="lazy"
               key={selectedIndex}
               src={images[selectedIndex]}
               alt="full"
-              className="max-w-xl max-h-[70vh] object-contain rounded-lg shadow-lg"
+              className="max-w-xl lg:max-h-[50vh]object-contain max-h-[300px] w-[100%]  rounded-lg shadow-lg"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -86,7 +88,7 @@ export default function ImageGallery() {
             />
             <button
               onClick={showNext}
-              className="absolute md:right-60 text-[#FFF6EB] bg-black bg-opacity-50 p-2 rounded-full right-4"
+              className="absolute md:right-50 right-4 text-[var(--text)] bg-white/50 bg-opacity-50 p-2 rounded-full "
             >
               <ChevronRight size={32} />
             </button>

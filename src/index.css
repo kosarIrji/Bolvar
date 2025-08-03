@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 body {
-  @apply font-modam;
+  font-family: 'modam', sans-serif;
 }
-:root{
-  --background:#FFEDD5,
-  --sidebar:#D97706 (amber-600),
-  --box:#FFF6EB,
-  --main:#8F5100,
+
+:root {
+  --background: #ffedd5;
+  --sidebar: #d97706 ;
+  --box: #fff6eb;
+  --text: #8f5100;
+  --accent: #b45309; 
+  --accent-soft: #fbbf24;
 }

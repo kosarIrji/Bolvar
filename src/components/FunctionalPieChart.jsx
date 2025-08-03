@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
-import { Button } from "./Button";
+import { Button } from "./ui/Button";
 import {
   PieChart,
   Pie,
@@ -10,26 +10,28 @@ import {
   Legend,
 } from "recharts";
 
-// دکمه سفارشی حرفه‌ای
 
+// دکمه سفارشی حرفه‌ای
 
 const CustomLegend = ({ payload }) => {
   return (
-    <ul style={{
-      listStyle: "none",
-      padding: 0,
-      margin: 0,
-      textAlign: "center",
-      direction: "rtl"
-    }}>
+    <ul
+      style={{
+        listStyle: "none",
+        padding: 0,
+        margin: 0,
+        textAlign: "center",
+        direction: "rtl",
+      }}
+      >
       {payload.map((entry, index) => (
         <li
-          key={`item-${index}`}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            margin: "0 12px"
-          }}
+        key={`item-${index}`}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          margin: "0 12px",
+        }}
         >
           <span
             style={{
@@ -56,6 +58,36 @@ const CustomLegend = ({ payload }) => {
   );
 };
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const { name } = payload[0].payload;
+    const value = payload[0].value;
+  
+    return (
+      <div
+        style={{
+          backgroundColor: "#fff",
+          padding: "10px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          fontFamily: "Modam",
+          fontSize: "14px",
+          direction: "rtl",
+        }}
+      >
+        <p>
+          <strong>نوع کاربری:</strong> {name}
+        </p>
+        <p>
+          <strong>{payload[0].name}:</strong> {value.toLocaleString()}{" "}
+          {payload[0].dataKey === "تعداد" ? "قطعه" : "متر مربع"}
+        </p>
+      </div>
+    );
+  }
+
+  return null;
+};
 export default function KarbariExcelPieChart() {
   const [freqData, setFreqData] = useState([]);
   const [areaData, setAreaData] = useState([]);
@@ -65,7 +97,7 @@ export default function KarbariExcelPieChart() {
   useEffect(() => {
     const loadExcel = async () => {
       try {
-        const response = await fetch("./data/Landuse_id_merged.xlsx");
+        const response = await fetch("./data/karbari.xlsx");
         if (!response.ok) throw new Error("خطا در دریافت فایل");
 
         const blob = await response.blob();
@@ -113,9 +145,8 @@ export default function KarbariExcelPieChart() {
   }, []);
 
   const chartContainerStyle = {
-   
     borderRadius: "1rem",
-    padding: "3rem",
+    padding: "1rem",
     flex: "1 1 400px",
     display: "flex",
     flexDirection: "column",
@@ -124,7 +155,7 @@ export default function KarbariExcelPieChart() {
 
   if (loading) {
     return (
-      <div style={{ textAlign: "center", padding: 20 }}>
+      <div style={{ textAlign: "center", padding: 10 }}>
         در حال بارگذاری داده‌ها...
       </div>
     );
@@ -132,15 +163,12 @@ export default function KarbariExcelPieChart() {
 
   if (freqData.length === 0 || areaData.length === 0) {
     return (
-      <div style={{ textAlign: "center"}}>
-        داده‌ای برای نمایش وجود ندارد.
-      </div>
+      <div style={{ textAlign: "center" }}>داده‌ای برای نمایش وجود ندارد.</div>
     );
   }
 
   return (
     <div style={{ textAlign: "center" }}>
-
       {/* دکمه انتخاب نمودار */}
       <div className="flex gap-5 justify-center">
         <Button
@@ -159,18 +187,20 @@ export default function KarbariExcelPieChart() {
       {/* نمودار انتخاب‌شده */}
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div style={chartContainerStyle}>
-          <h3 style={{
-            marginBottom: "1rem",
-            color: "#8F5100",
-            fontSize: "1rem",
-            fontWeight: "bold"
-          }}>
+          <h3
+            style={{
+              marginBottom: "1rem",
+              color: "var(--text)",
+              fontSize: "1rem",
+              fontWeight: "bold",
+            }}
+          >
             {selectedChart === "freq"
               ? "نمودار نوع کاربری بر اساس فراوانی"
               : "نمودار نوع کاربری بر اساس مساحت"}
           </h3>
 
-          <div style={{ width: "100%", height: 280 }}>
+          <div style={{ width: "100%", height: 300 }}>
             <ResponsiveContainer>
               <PieChart>
                 <Pie
@@ -178,22 +208,20 @@ export default function KarbariExcelPieChart() {
                   cx="50%"
                   cy="50%"
                   outerRadius={80}
-                  label
                   dataKey={selectedChart === "freq" ? "تعداد" : "مساحت"}
                   nameKey="name"
                 >
-                  {(selectedChart === "freq" ? freqData : areaData).map((entry, idx) => (
-                    <Cell key={`chart-${idx}`} fill={entry.color} />
-                  ))}
+                  {(selectedChart === "freq" ? freqData : areaData).map(
+                    (entry, idx) => (
+                      <Cell key={`chart-${idx}`} fill={entry.color} />
+                    )
+                  )}
                 </Pie>
                 <Tooltip
-                  formatter={(value) => [
-                    `${value.toLocaleString()} ${selectedChart === "freq" ? "واحد" : "متر مربع"}`,
-                    selectedChart === "freq" ? "تعداد" : "مساحت",
-                  ]}
+               content={<CustomTooltip />}
                 />
+
                 <Legend
-      
                   layout="horizontal"
                   verticalAlign="bottom"
                   align="center"
