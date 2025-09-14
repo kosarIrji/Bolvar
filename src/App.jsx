@@ -30,7 +30,7 @@ function App() {
         {" "}
         {/* حاشیه راست برای نوبار */}
         <Container>
-          <div className="">
+          <div className="px-0">
             <SideBar />
           <div className="">
 
