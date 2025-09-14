@@ -3,12 +3,6 @@ import { motion } from "framer-motion";
 import Details from "../components/config/details.json";
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
-
-
-
-
-
-
 const windowHeight = window.innerWidth;
 
 

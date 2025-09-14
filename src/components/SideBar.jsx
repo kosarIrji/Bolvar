@@ -53,20 +53,20 @@ export default function SideBar() {
   return (
     <>
       {/* دکمه منو برای موبایل */}
-      <div className="md:hidden fixed top-4 right-4 z-[1001]">
+      {/* <div className="md:hidden fixed top-4 right-4 z-[1001]">
         <button
           onClick={toggleMenu}
           className="p-4 rounded-full shadow-lg border bg-white"
         >
           {menuOpen ? <X size={28} /> : <Menu size={24} />}
         </button>
-      </div>
+      </div> */}
 
       {/* سایدبار دسکتاپ */}
-      <aside className="hidden md:flex fixed top-0 right-0 text-2xl h-full w-58 bg-[var(--sidebar)] shadow-xl z-[1000] flex-col items-center py-1">
-        <div className="mb-2">
+      <aside className="hidden md:flex fixed top-0 pt-5 right-0 text-2xl h-full w-58 bg-[var(--sidebar)] shadow-xl z-[1000] flex-col items-center py-1">
+        {/* <div className="mb-2">
           <img src="./images/logo.png" alt="لوگو" className="w-40 h-auto mb-2" />
-        </div>
+        </div> */}
         <nav className="w-full px-4 ">
           <ul className="space-y-2  ">
             {menuItems.map((item) => (
@@ -102,7 +102,7 @@ export default function SideBar() {
       </aside>
 
       {/* منوی موبایل کشویی */}
-      <div
+      {/* <div
         className={`fixed top-0 right-0 h-full w-1/2 max-w-xs shadow-2xl transform transition-transform duration-300 ease-in-out z-[9999] bg-white md:hidden ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -150,7 +150,7 @@ export default function SideBar() {
             ))}
           </ul>
         </nav>
-      </div>
+      </div> */}
     </>
   );
 }

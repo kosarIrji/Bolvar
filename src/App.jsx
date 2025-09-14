@@ -15,6 +15,9 @@ import SideBar from "./components/SideBar";
 import Priorities from "./components/Priorities";
 import Location from "./components/location";
 import Comments from "./components/comments";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="relative font-modam  text-base  text-gray-800 font-medium">
@@ -22,11 +25,18 @@ function App() {
         className="blur-sm bg-cover fixed inset-0 -z-10 bg-center"
         style={{ backgroundImage: "url('./images/bolvar.jpg')" }}
       ></div>
-      <SideBar />
-      <div className="pl-[8-px] pr-[8px] pb-5  md:pr-60 md:pl-5 ">
+
+      <div className="pl-[8px] pr-[8px] pb-5  md:pr-60 md:pl-5 ">
         {" "}
         {/* حاشیه راست برای نوبار */}
         <Container>
+          <div className="">
+            <SideBar />
+          <div className="">
+
+          <Header />
+          </div>
+          </div>
           <div id="identify">
             <Identify />
           </div>
@@ -61,6 +71,10 @@ function App() {
             <ImageGallery />
           </div>
         </Container>
+      </div>
+      <div className="md:pr-60 md:pl-5">
+        
+        <Footer />
       </div>
     </div>
   );
